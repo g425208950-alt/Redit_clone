@@ -1,0 +1,5 @@
+/home/u42520/C++/Redis/build/CMakeFiles/edit_cache.dir
+/home/u42520/C++/Redis/build/CMakeFiles/rebuild_cache.dir
+/home/u42520/C++/Redis/build/src/CMakeFiles/redis-server.dir
+/home/u42520/C++/Redis/build/src/CMakeFiles/edit_cache.dir
+/home/u42520/C++/Redis/build/src/CMakeFiles/rebuild_cache.dir

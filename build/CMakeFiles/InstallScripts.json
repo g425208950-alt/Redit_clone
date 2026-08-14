@@ -1,0 +1,8 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/u42520/C++/Redis/build/cmake_install.cmake",
+		"/home/u42520/C++/Redis/build/src/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
