@@ -1,1 +1,0 @@
-/usr/bin/c++ -g -O0 -Wall -Wextra "CMakeFiles/redis-server.dir/main.cpp.o" "CMakeFiles/redis-server.dir/server/Server.cpp.o" "CMakeFiles/redis-server.dir/resp/Decoder.cpp.o" "CMakeFiles/redis-server.dir/resp/Encoder.cpp.o" "CMakeFiles/redis-server.dir/store/Store.cpp.o" "CMakeFiles/redis-server.dir/commands/Dispatcher.cpp.o" -o redis-server
