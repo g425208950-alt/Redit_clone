@@ -146,8 +146,8 @@ void Server::handleRead(int fd) {
 
     if (eof) conn.readClosed = true;
     if (!conn.writeBuf.empty()) {
-        tryWrite(conn);
-    } else if (conn.readClosed) {
+        tryWrite(conn); // 这是启动handleWrite的第一途径，如果writebuffer有剩余，则设置为EPOLLOUT
+    } else if (conn.readClosed) { // 如果writebuffer为空，Readbuffer也被close，直接关闭Conn
         closeConn(fd);
     }
 }
@@ -166,7 +166,7 @@ void Server::processRequests(Connection& conn) {
         if (!opt || consumed == 0) break;
         conn.readBuf.erase(0, consumed);
 
-        std::vector<std::string> args;
+        std::vector<std::string> args; 
         if (opt->type == RespType::Array) {
             for (auto& e : opt->items) {
                 if (e.type == RespType::BulkString) args.push_back(std::move(e.str));
