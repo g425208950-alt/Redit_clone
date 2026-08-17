@@ -158,11 +158,18 @@ void Server::handleWrite(int fd) {
     tryWrite(it->second);
 }
 
-void Server::processRequests(Connection& conn) {
+/*struct RespValue {
+    RespType type;
+    long long intValue = 0;
+    std::string str;
+    std::vector<RespValue> items;
+    bool isNull = false;*/ 
+
+void Server::processRequests(Connection& conn) { 
     Decoder decoder;
     while (!conn.readBuf.empty()) {
         size_t consumed = 0;
-        auto opt = decoder.tryParse(conn.readBuf, consumed);
+        auto opt = decoder.tryParse(conn.readBuf, consumed); // RespValue
         if (!opt || consumed == 0) break;
         conn.readBuf.erase(0, consumed);
 

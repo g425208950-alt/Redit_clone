@@ -20,13 +20,13 @@ std::optional<RespValue> Decoder::parseAt(const std::string& buf, size_t start, 
         return std::nullopt;
     }
     char t = buf[start];
-    std::string payload = buf.substr(start + 1, lineEnd - (start + 1));
+    std::string payload = buf.substr(start + 1, lineEnd - (start + 1)); // +2WE\r\n
     size_t after = lineEnd + 2;
-
+// 若报文有错，则return null + consumed = 0 若 数据有错，则return Respvalue的ERROR，并修正consumed，去掉坏帧
     switch (t) {
         case '+':
             consumed = after - start;
-            return RespValue::simpleString(payload);
+            return RespValue::simpleString(payload); 
         case '-':
             consumed = after - start;
             return RespValue::error(payload);
@@ -57,7 +57,7 @@ std::optional<RespValue> Decoder::parseAt(const std::string& buf, size_t start, 
                 consumed = 0;
                 return std::nullopt;
             }
-            if (buf[dataEnd] != '\r' || buf[dataEnd + 1] != '\n') {
+            if (buf[dataEnd] != '\r' || buf[dataEnd + 1] != '\n') {//bug 
                 consumed = dataEnd + 2 - start;
                 return RespValue::error("ERR protocol error: bad bulk string terminator");
             }
@@ -82,7 +82,7 @@ std::optional<RespValue> Decoder::parseAt(const std::string& buf, size_t start, 
             size_t cursor = after;
             for (long long i = 0; i < count; i++) {
                 size_t subConsumed;
-                auto sub = parseAt(buf, cursor, subConsumed);
+                auto sub = parseAt(buf, cursor, subConsumed); // 递归
                 if (!sub) {
                     consumed = 0;
                     return std::nullopt;
