@@ -57,7 +57,7 @@ std::optional<RespValue> Decoder::parseAt(const std::string& buf, size_t start, 
                 consumed = 0;
                 return std::nullopt;
             }
-            if (buf[dataEnd] != '\r' || buf[dataEnd + 1] != '\n') {//bug 
+            if (buf[dataEnd] != '\r' || buf[dataEnd + 1] != '\n') {// bug
                 consumed = dataEnd + 2 - start;
                 return RespValue::error("ERR protocol error: bad bulk string terminator");
             }
